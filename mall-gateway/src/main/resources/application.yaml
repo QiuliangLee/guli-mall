@@ -56,8 +56,13 @@ spring:
             - RewritePath=/api/third-party/(?<segment>.*),/$\{segment}
 
         - id: admin_route
+          #          http://localhost:88         /api/captcha.jpg重写路径
+          #          http://renren-fast         /api/captcha.jpg,renren-fast从nacos里找到192.168.0.101:8080
+          #          http://192.168.0.101:8080 /api/captcha.jpg,重写路径
+          #          http://192.168.0.101:8080 /renren-fast/captcha.jpg
           uri: lb://renren-fast
           predicates:
+            #            - 前端项目发来的请求都带上/api/
             - Path=/api/**
           filters:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
