@@ -1,3 +1,4 @@
+
 个人学习文档：https://www.yuque.com/zhangshuaiyin/guli-mall
 
 # 环境信息
@@ -42,3 +43,5 @@ hadoop100		item.gulimall.com
 hadoop100		auth.gulimall.com
 hadoop100		cart.gulimall.com
 ```
+=======
+# guli-mall
