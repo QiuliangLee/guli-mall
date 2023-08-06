@@ -24,6 +24,7 @@ public class MallCorsConfiguration {
         corsConfiguration.addAllowedOrigin("*");
         corsConfiguration.setAllowCredentials(true);
 
+        //任意路径都要配置
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsWebFilter(source);
     }
