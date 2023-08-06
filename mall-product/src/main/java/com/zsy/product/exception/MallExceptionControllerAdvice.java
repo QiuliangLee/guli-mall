@@ -17,9 +17,7 @@ import java.util.Map;
  * @author ZSY
  */
 @Slf4j
-//@ResponseBody
-//@ControllerAdvice(basePackages = "com.zsy.product.controller")
-@RestControllerAdvice(basePackages = "com.zsy.product.controller")
+@RestControllerAdvice(basePackages = "com.zsy.product.api")
 public class MallExceptionControllerAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)

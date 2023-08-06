@@ -71,7 +71,7 @@ public class BrandController {
 //        }else {
 //
 //        }
-
+        System.out.println("123");
         brandService.save(brand);
 
         return R.ok();

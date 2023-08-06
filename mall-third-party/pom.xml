@@ -7,6 +7,7 @@
         <artifactId>guli-mall</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>mall-third-party</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-third-party</name>

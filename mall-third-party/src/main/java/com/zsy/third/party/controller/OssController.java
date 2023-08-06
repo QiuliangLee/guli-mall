@@ -35,6 +35,7 @@ public class OssController {
 
     /**
      * Oss 获取服务端签名
+     *
      * @return
      */
     @RequestMapping("/oss/policy")

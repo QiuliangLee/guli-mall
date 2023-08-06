@@ -22,7 +22,6 @@ public class ListValueConstraintValidator implements ConstraintValidator<ListVal
         for (int val : values) {
             set.add(val);
         }
-
     }
 
     /**
