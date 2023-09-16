@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @create: 2020-06-11 09:39
  **/
 

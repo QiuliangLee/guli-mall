@@ -3,7 +3,7 @@ package com.zsy.auth.vo;
 import lombok.Data;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2021-04-22 19:07
  **/
 @Data

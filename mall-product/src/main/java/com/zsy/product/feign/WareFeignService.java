@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @date: 2021/3/13 10:11
  */
 @FeignClient("mall-ware")

@@ -1,7 +1,7 @@
 package com.zsy.search.constant;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @date: 2021/3/11 15:22
  */
 public class EsConstant {

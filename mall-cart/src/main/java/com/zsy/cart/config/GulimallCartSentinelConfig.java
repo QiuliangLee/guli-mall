@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Description: 自定义阻塞返回方法
  * @Created: with IntelliJ IDEA.
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2020-07-13 11:30
  **/
 @Configuration

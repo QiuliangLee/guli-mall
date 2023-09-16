@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Description: 线程池配置类
  * @Created: with IntelliJ IDEA.
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2020-06-23 20:24
  **/
 

@@ -1,7 +1,7 @@
 package com.zsy.common.constant;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @date: 2021/4/22 21:30
  */
 public class AuthServerConstant {

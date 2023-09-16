@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2021-04-22 17:10
  **/
 @FeignClient("mall-member")

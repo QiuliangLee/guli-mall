@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 传输对象，存储到es的数据
  *
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @date: 2021/3/12 15:37
  */
 @Data

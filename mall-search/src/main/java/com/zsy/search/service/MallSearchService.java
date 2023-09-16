@@ -4,7 +4,7 @@ import com.zsy.search.vo.SearchParam;
 import com.zsy.search.vo.SearchResult;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @date: 2021/3/11 15:22
  */
 public interface MallSearchService {

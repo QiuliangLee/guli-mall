@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2021-04-22 11:41
  **/
 @Data

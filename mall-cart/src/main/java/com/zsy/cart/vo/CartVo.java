@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Description: 整个购物车存放的商品信息   需要计算的属性需要重写get方法，保证每次获取属性都会进行计算
  * @Created: with IntelliJ IDEA.
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2020-06-30 16:42
  **/
 public class CartVo {
@@ -36,7 +36,7 @@ public class CartVo {
     /**
      * 减免价格
      */
-    private BigDecimal reduce = new BigDecimal("0.00");;
+    private BigDecimal reduce = new BigDecimal("0.00");
 
     public List<CartItemVo> getItems() {
         return items;

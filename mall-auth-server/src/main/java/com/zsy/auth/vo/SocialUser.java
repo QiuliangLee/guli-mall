@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @Description: 社交用户信息
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2021-04-22 19:07
  **/
 @Data

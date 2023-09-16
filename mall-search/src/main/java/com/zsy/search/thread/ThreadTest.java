@@ -3,7 +3,7 @@ package com.zsy.search.thread;
 import java.util.concurrent.*;
 
 /**
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @date: 2021/3/11 15:22
  */
 public class ThreadTest {

@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @Description:
  * @Created: with IntelliJ IDEA.
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2020-06-30 17:06
  **/
 public interface CartService {
@@ -37,9 +37,10 @@ public interface CartService {
 
     /**
      * 清空购物车的数据
+     *
      * @param cartKey
      */
-    public void clearCartInfo(String cartKey);
+    void clearCartInfo(String cartKey);
 
     /**
      * 勾选购物项

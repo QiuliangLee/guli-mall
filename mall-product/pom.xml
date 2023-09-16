@@ -22,6 +22,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
         <!-- redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,6 +34,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--        以后使用redis客户端这个-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>

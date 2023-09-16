@@ -31,7 +31,7 @@ import static com.zsy.common.constant.CartConstant.CART_PREFIX;
 /**
  * @Description:
  * @Created: with IntelliJ IDEA.
- * @author: zhangshuaiyin
+ * @author: liqiuliang
  * @createTime: 2020-06-30 17:06
  **/
 @Slf4j
