@@ -1,27 +1,25 @@
 package com.zsy.product.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsy.common.utils.PageUtils;
+import com.zsy.common.utils.Query;
 import com.zsy.product.dao.BrandDao;
+import com.zsy.product.dao.CategoryBrandRelationDao;
 import com.zsy.product.dao.CategoryDao;
 import com.zsy.product.entity.BrandEntity;
+import com.zsy.product.entity.CategoryBrandRelationEntity;
 import com.zsy.product.entity.CategoryEntity;
 import com.zsy.product.service.BrandService;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.zsy.product.service.CategoryBrandRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zsy.common.utils.PageUtils;
-import com.zsy.common.utils.Query;
-
-import com.zsy.product.dao.CategoryBrandRelationDao;
-import com.zsy.product.entity.CategoryBrandRelationEntity;
-import com.zsy.product.service.CategoryBrandRelationService;
 
 
 @Service("categoryBrandRelationService")
@@ -81,12 +79,10 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     public List<BrandEntity> getBrandsByCatId(Long catId) {
 
         List<CategoryBrandRelationEntity> catelogId = relationDao.selectList(new QueryWrapper<CategoryBrandRelationEntity>().eq("catelog_id", catId));
-        List<BrandEntity> collect = catelogId.stream().map(item -> {
+        return catelogId.stream().map(item -> {
             Long brandId = item.getBrandId();
-            BrandEntity byId = brandService.getById(brandId);
-            return byId;
+            return brandService.getById(brandId);
         }).collect(Collectors.toList());
-        return collect;
     }
 
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload
-      action="http://gulimall-hello.oss-cn-beijing.aliyuncs.com"
+      action="http://gulimall-lucas2.oss-cn-shanghai.aliyuncs.com"
       :data="dataObj"
       :list-type="listType"
       :file-list="fileList"
@@ -21,19 +21,20 @@
   </div>
 </template>
 <script>
-import { policy } from "./policy";
-import { getUUID } from '@/utils'
-export default {
-  name: "multiUpload",
-  props: {
-    //图片属性数组
-    value: Array,
-    //最大上传图片数量
-    maxCount: {
-      type: Number,
-      default: 30
-    },
-    listType:{
+  import {policy} from "./policy";
+  import {getUUID} from '@/utils'
+
+  export default {
+    name: "multiUpload",
+    props: {
+      //图片属性数组
+      value: Array,
+      //最大上传图片数量
+      maxCount: {
+        type: Number,
+        default: 30
+      },
+      listType: {
       type: String,
       default: "picture-card"
     },
@@ -99,7 +100,7 @@ export default {
             resolve(true);
           })
           .catch(err => {
-            console.log("出错了...",err)
+            console.log("出错了...", err);
             reject(false);
           });
       });

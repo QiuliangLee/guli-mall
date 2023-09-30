@@ -27,7 +27,7 @@ class MallThirdPartyApplicationTests {
 
     @Test
     void contextLoads() throws FileNotFoundException {
-        ossClient.putObject("gulimall-hello", "hh.png", new FileInputStream("C:\\Users\\ZSY\\Pictures\\dubhe.png"));
+        ossClient.putObject("gulimall-lucas2", "hh.png", new FileInputStream("C:\\Users\\77914\\Desktop\\谷粒商城\\基础篇\\资料\\pics\\0d40c24b264aa511.jpg"));
     }
 
     @Test

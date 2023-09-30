@@ -1,8 +1,8 @@
 package com.zsy.product.service;
 
-import com.zsy.product.entity.BrandEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zsy.common.utils.PageUtils;
+import com.zsy.product.entity.BrandEntity;
 import com.zsy.product.entity.CategoryBrandRelationEntity;
 
 import java.util.List;
@@ -26,6 +26,5 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
     void updateCategory(Long catId, String name);
 
     List<BrandEntity> getBrandsByCatId(Long catId);
-
 }
 

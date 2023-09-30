@@ -24,6 +24,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--对象存储-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alicloud-oss</artifactId>

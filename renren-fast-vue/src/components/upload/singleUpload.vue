@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload
-      action="http://gulimall-hello.oss-cn-beijing.aliyuncs.com"
+      action="http://gulimall-lucas2.oss-cn-shanghai.aliyuncs.com"
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"
@@ -19,8 +19,8 @@
   </div>
 </template>
 <script>
-   import {policy} from './policy'
-   import { getUUID } from '@/utils'
+  import {policy} from './policy'
+  import {getUUID} from '@/utils'
 
   export default {
     name: 'singleUpload',
@@ -95,7 +95,7 @@
         })
       },
       handleUploadSuccess(res, file) {
-        console.log("上传成功...")
+        console.log("上传成功...");
         this.showFileList = true;
         this.fileList.pop();
         this.fileList.push({name: file.name, url: this.dataObj.host + '/' + this.dataObj.key.replace("${filename}",file.name) });

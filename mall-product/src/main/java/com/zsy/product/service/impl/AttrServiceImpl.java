@@ -1,38 +1,36 @@
 package com.zsy.product.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsy.common.constant.ProductConstant;
+import com.zsy.common.utils.PageUtils;
+import com.zsy.common.utils.Query;
 import com.zsy.product.dao.AttrAttrgroupRelationDao;
+import com.zsy.product.dao.AttrDao;
 import com.zsy.product.dao.AttrGroupDao;
 import com.zsy.product.dao.CategoryDao;
 import com.zsy.product.entity.AttrAttrgroupRelationEntity;
+import com.zsy.product.entity.AttrEntity;
 import com.zsy.product.entity.AttrGroupEntity;
 import com.zsy.product.entity.CategoryEntity;
+import com.zsy.product.service.AttrService;
 import com.zsy.product.service.CategoryService;
 import com.zsy.product.vo.AttrGroupRelationVo;
 import com.zsy.product.vo.AttrRespVo;
 import com.zsy.product.vo.AttrVo;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zsy.common.utils.PageUtils;
-import com.zsy.common.utils.Query;
-
-import com.zsy.product.dao.AttrDao;
-import com.zsy.product.entity.AttrEntity;
-import com.zsy.product.service.AttrService;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 
 @Service("attrService")
@@ -201,11 +199,9 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     public List<AttrEntity> getRelationAttr(Long attrgroupId) {
         List<AttrAttrgroupRelationEntity> entities = relationDao.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrgroupId));
 
-        List<Long> attrIds = entities.stream().map((attr) -> {
-            return attr.getAttrId();
-        }).collect(Collectors.toList());
+        List<Long> attrIds = entities.stream().map(AttrAttrgroupRelationEntity::getAttrId).collect(Collectors.toList());
 
-        if(attrIds == null || attrIds.size() == 0){
+        if (attrIds.size() == 0) {
             return null;
         }
         Collection<AttrEntity> attrEntities = this.listByIds(attrIds);
