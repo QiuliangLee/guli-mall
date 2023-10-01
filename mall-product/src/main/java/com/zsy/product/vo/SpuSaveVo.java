@@ -17,7 +17,6 @@ import java.util.List;
  */
 @Data
 public class SpuSaveVo {
-
     private String spuName;
     private String spuDescription;
     private Long catalogId;
@@ -29,7 +28,4 @@ public class SpuSaveVo {
     private Bounds bounds;
     private List<BaseAttrs> baseAttrs;
     private List<Skus> skus;
-
-
-
 }

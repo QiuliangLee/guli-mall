@@ -1,7 +1,7 @@
 package com.zsy.coupon.service;
 
-import com.zsy.common.to.SkuReductionTo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zsy.common.to.SkuReductionTo;
 import com.zsy.common.utils.PageUtils;
 import com.zsy.coupon.entity.SkuFullReductionEntity;
 
@@ -19,7 +19,6 @@ public interface SkuFullReductionService extends IService<SkuFullReductionEntity
     PageUtils queryPage(Map<String, Object> params);
 
     void saveSkuReduction(SkuReductionTo reductionTo);
-
 
 }
 

@@ -1,33 +1,29 @@
 package com.zsy.ware.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsy.common.constant.WareConstant;
+import com.zsy.common.utils.PageUtils;
+import com.zsy.common.utils.Query;
+import com.zsy.ware.dao.PurchaseDao;
+import com.zsy.ware.entity.PurchaseDetailEntity;
+import com.zsy.ware.entity.PurchaseEntity;
+import com.zsy.ware.service.PurchaseDetailService;
+import com.zsy.ware.service.PurchaseService;
 import com.zsy.ware.service.WareSkuService;
 import com.zsy.ware.vo.MergeVo;
-import com.zsy.ware.entity.PurchaseDetailEntity;
-import com.zsy.ware.service.PurchaseDetailService;
 import com.zsy.ware.vo.PurchaseDoneVo;
 import com.zsy.ware.vo.PurchaseItemDoneVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zsy.common.utils.PageUtils;
-import com.zsy.common.utils.Query;
-
-import com.zsy.ware.dao.PurchaseDao;
-import com.zsy.ware.entity.PurchaseEntity;
-import com.zsy.ware.service.PurchaseService;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.constraints.NotNull;
 
 
 @Service("purchaseService")
@@ -87,7 +83,6 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseDao, PurchaseEntity
             return detailEntity;
         }).collect(Collectors.toList());
 
-
         detailService.updateBatchById(collect);
 
         PurchaseEntity purchaseEntity = new PurchaseEntity();
@@ -107,11 +102,8 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseDao, PurchaseEntity
             PurchaseEntity byId = this.getById(id);
             return byId;
         }).filter(item -> {
-            if (item.getStatus() == WareConstant.PurchaseStatusEnum.CREATED.getCode() ||
-                    item.getStatus() == WareConstant.PurchaseStatusEnum.ASSIGNED.getCode()) {
-                return true;
-            }
-            return false;
+            return item.getStatus() == WareConstant.PurchaseStatusEnum.CREATED.getCode() ||
+                    item.getStatus() == WareConstant.PurchaseStatusEnum.ASSIGNED.getCode();
         }).map(item->{
             item.setStatus(WareConstant.PurchaseStatusEnum.RECEIVE.getCode());
             item.setUpdateTime(new Date());
@@ -172,10 +164,5 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseDao, PurchaseEntity
         purchaseEntity.setStatus(flag?WareConstant.PurchaseStatusEnum.FINISH.getCode():WareConstant.PurchaseStatusEnum.HASERROR.getCode());
         purchaseEntity.setUpdateTime(new Date());
         this.updateById(purchaseEntity);
-
-
-
-
     }
-
 }

@@ -146,10 +146,6 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
                         defaultImg = image.getImgUrl();
                     }
                 }
-                //    private String skuName;
-                //    private BigDecimal price;
-                //    private String skuTitle;
-                //    private String skuSubtitle;
                 SkuInfoEntity skuInfoEntity = new SkuInfoEntity();
                 BeanUtils.copyProperties(item, skuInfoEntity);
                 skuInfoEntity.setBrandId(infoEntity.getBrandId());

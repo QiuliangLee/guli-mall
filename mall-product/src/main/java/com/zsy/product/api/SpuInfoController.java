@@ -1,16 +1,15 @@
 package com.zsy.product.api;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.zsy.common.utils.PageUtils;
+import com.zsy.common.utils.R;
+import com.zsy.product.entity.SpuInfoEntity;
+import com.zsy.product.service.SpuInfoService;
 import com.zsy.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.zsy.product.entity.SpuInfoEntity;
-import com.zsy.product.service.SpuInfoService;
-import com.zsy.common.utils.PageUtils;
-import com.zsy.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * spu信息
@@ -66,9 +65,7 @@ public class SpuInfoController {
     //@RequiresPermissions("product:spuinfo:save")
     public R save(@RequestBody SpuSaveVo vo) {
         //spuInfoService.save(spuInfo);
-
         spuInfoService.saveSpuInfo(vo);
-
         return R.ok();
     }
 
