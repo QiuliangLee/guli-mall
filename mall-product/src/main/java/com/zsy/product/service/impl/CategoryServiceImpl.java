@@ -16,7 +16,6 @@ import org.redisson.api.RLock;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -157,7 +156,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      *
      * @return
      */
-    @Cacheable(value = {"category"}, key = "#root.method.name", sync = true)
+//    @Cacheable(value = {"category"}, key = "#root.method.name", sync = true)
     @Override
     public List<CategoryEntity> getLevel1Categories() {
         System.out.println("get Level 1 Categories........");
@@ -270,7 +269,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryEntity> level1Categories = getParentCid(selectList, 0L);
 
         //封装数据
-        Map<String, List<Catalogs2Vo>> parentCid = level1Categories.stream().collect(Collectors.toMap(k -> k.getCatId().toString(), v -> {
+        return level1Categories.stream().collect(Collectors.toMap(k -> k.getCatId().toString(), v -> {
             //1、每一个的一级分类,查到这个一级分类的二级分类
             List<CategoryEntity> categoryEntities = getParentCid(selectList, v.getCatId());
 
@@ -278,17 +277,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             List<Catalogs2Vo> catalogs2Vos = null;
             if (categoryEntities != null) {
                 catalogs2Vos = categoryEntities.stream().map(l2 -> {
-                    Catalogs2Vo catalogs2Vo = new Catalogs2Vo(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName().toString());
+                    Catalogs2Vo catalogs2Vo = new Catalogs2Vo(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName());
 
                     //1、找当前二级分类的三级分类封装成vo
                     List<CategoryEntity> level3Catelog = getParentCid(selectList, l2.getCatId());
-
                     if (level3Catelog != null) {
                         List<Catalogs2Vo.Category3Vo> category3Vos = level3Catelog.stream().map(l3 -> {
                             //2、封装成指定格式
-                            Catalogs2Vo.Category3Vo category3Vo = new Catalogs2Vo.Category3Vo(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());
-
-                            return category3Vo;
+                            return new Catalogs2Vo.Category3Vo(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());
                         }).collect(Collectors.toList());
                         catalogs2Vo.setCatalog3List(category3Vos);
                     }
@@ -299,8 +295,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
             return catalogs2Vos;
         }));
-
-        return parentCid;
     }
 
     private List<CategoryEntity> getParentCid(List<CategoryEntity> selectList, Long parentCid) {

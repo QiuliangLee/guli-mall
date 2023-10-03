@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Catalogs2Vo {
-
     /**
      * 一级父分类的id
      */
@@ -39,7 +38,6 @@ public class Catalogs2Vo {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Category3Vo {
-
         /**
          * 父分类、二级分类id
          */

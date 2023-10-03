@@ -5,6 +5,10 @@ import com.zsy.product.service.BrandService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+
+import java.util.UUID;
 
 @SpringBootTest
 class MallProductApplicationTests {
@@ -20,4 +24,14 @@ class MallProductApplicationTests {
         System.out.println("save successfully!");
     }
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
+    @Test
+    public void queryPage() {
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        ops.set("hello", "workd" + UUID.randomUUID());
+        String hello = ops.get("hello");
+        System.out.println(hello);
+    }
 }

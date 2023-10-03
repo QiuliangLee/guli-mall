@@ -50,10 +50,12 @@ public class IndexController {
     }
 
 
-    /*@ResponseBody
+    @ResponseBody
     @GetMapping(value = "/hello")
     public String hello() {
-
+        return "hello";
+    }
+        /*
         //1、获取一把锁，只要锁的名字一样，就是同一把锁
         RLock myLock = redisson.getLock("my-lock");
 

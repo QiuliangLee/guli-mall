@@ -1,22 +1,27 @@
 package com.zsy.product.service.impl;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 /**
  * @author Lucas
  * @create 2023-08-27 1:56
  */
+@SpringBootTest
 public class CategoryServiceImplTest {
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @Test
     public void queryPage() {
-        Set<Integer> collect = new ArrayList<Integer>().stream()
-                .filter(integer -> integer != null)
-                .map(integer -> integer)
-                .collect(Collectors.toSet());
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        ops.set("hello", "workd" + UUID.randomUUID());
+        String hello = ops.get("hello");
+        System.out.println(hello);
     }
 }

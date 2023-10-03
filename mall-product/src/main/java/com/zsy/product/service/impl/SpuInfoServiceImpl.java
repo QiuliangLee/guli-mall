@@ -278,7 +278,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             TypeReference<List<SkuHasStockVo>> typeReference = new TypeReference<List<SkuHasStockVo>>() {
             };
             stockMap = skuHasStock.getData(typeReference).stream()
-                    .collect(Collectors.toMap(SkuHasStockVo::getSkuId, item -> item.getHasStock()));
+                    .collect(Collectors.toMap(SkuHasStockVo::getSkuId, SkuHasStockVo::getHasStock, (x, y) -> x));
         } catch (Exception e) {
             log.error("库存服务查询异常：原因{}", e);
         }
@@ -329,6 +329,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         } else {
             // 远程调用失败
             // TODO 7、重复调用？接口幂等性:重试机制
+//            1、构造请求数据，将对象转为json
+//            2、发送请求进行执行（执行成功会解码响应数据)
+//            3、执行请求会有重试机制
         }
     }
 }

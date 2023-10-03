@@ -34,16 +34,17 @@ public class ElasticSaveController {
      */
     @PostMapping(value = "/product")
     public R productStatusUp(@RequestBody List<SkuEsModel> skuEsModels) {
-
-        boolean status = false;
+        boolean status;
         try {
             status = productSaveService.productStatusUp(skuEsModels);
         } catch (IOException e) {
+            //多数是es连不上
             log.error("ElasticSaveController - 商品上架错误: ", e);
             return R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());
         }
 
         if (status) {
+            //某个sku有问题，商家失败
             return R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());
         } else {
             return R.ok();
