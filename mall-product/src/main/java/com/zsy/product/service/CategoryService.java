@@ -50,11 +50,12 @@ public interface CategoryService extends IService<CategoryEntity> {
      * @return
      */
     List<CategoryEntity> getLevel1Categories();
+
     /**
      * 查找二级、三级分类，首页显示
      *
      * @return
      */
-    Map<String, List<Catalogs2Vo>> getCatalogJson();
+    Map<String, List<Catalogs2Vo>> getCatalogJsonFromDbWithRedisLock();
 }
 
