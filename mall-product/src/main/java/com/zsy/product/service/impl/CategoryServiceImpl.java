@@ -38,6 +38,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     @Autowired
     StringRedisTemplate redisTemplate;
+
     @Autowired
     RedissonClient redissonClient;
 
@@ -175,8 +176,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      *
      * @return
      */
+    @Override
     public Map<String, List<Catalogs2Vo>> getCatalogJsonFromDbWithRedissonLock() {
-
         //1、占分布式锁。去redis占坑
         //（锁的粒度，越细越快:具体缓存的是某个数据，11号商品） product-11-lock
         //RLock catalogJsonLock = redissonClient.getLock("catalogJson-lock");
@@ -184,7 +185,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         RReadWriteLock readWriteLock = redissonClient.getReadWriteLock("catalogJson-lock");
         RLock rLock = readWriteLock.readLock();
 
-        Map<String, List<Catalogs2Vo>> dataFromDb = null;
+        Map<String, List<Catalogs2Vo>> dataFromDb;
         try {
             rLock.lock();
             //加锁成功...执行业务
@@ -202,7 +203,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      *
      * @return
      */
-    @Override
     public Map<String, List<Catalogs2Vo>> getCatalogJsonFromDbWithRedisLock() {
 
         //1、占分布式锁。去redis占坑      设置过期时间必须和加锁是同步的，保证原子性（避免死锁）

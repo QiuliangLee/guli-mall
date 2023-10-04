@@ -29,5 +29,4 @@ public class MyRedissonConfig {
         // 2、根据 Config 创建出 RedissonClient 实例
         return Redisson.create(config);
     }
-
 }

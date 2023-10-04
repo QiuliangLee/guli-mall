@@ -3,14 +3,21 @@ package com.zsy.product.web;
 import com.zsy.product.entity.CategoryEntity;
 import com.zsy.product.service.CategoryService;
 import com.zsy.product.vo.Catalogs2Vo;
+import org.redisson.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: liqiuliang
@@ -22,12 +29,11 @@ public class IndexController {
     @Resource
     private CategoryService categoryService;
 
-   /* @Autowired
+    @Autowired
     private RedissonClient redisson;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-*/
 
     @GetMapping(value = {"/", "index.html"})
     private String indexPage(Model model) {
@@ -37,7 +43,6 @@ public class IndexController {
         return "index";
     }
 
-
     /**
      * 二级、三级分类数据
      *
@@ -46,16 +51,13 @@ public class IndexController {
     @GetMapping(value = "/index/catalog.json")
     @ResponseBody
     public Map<String, List<Catalogs2Vo>> getCatalogJson() {
-        return categoryService.getCatalogJsonFromDbWithRedisLock();
+        return categoryService.getCatalogJsonFromDbWithRedissonLock();
     }
 
 
     @ResponseBody
     @GetMapping(value = "/hello")
     public String hello() {
-        return "hello";
-    }
-        /*
         //1、获取一把锁，只要锁的名字一样，就是同一把锁
         RLock myLock = redisson.getLock("my-lock");
 
@@ -66,12 +68,16 @@ public class IndexController {
         // myLock.lock(10,TimeUnit.SECONDS);   //10秒钟自动解锁,自动解锁时间一定要大于业务执行时间
         //问题：在锁时间到了以后，不会自动续期
         //1、如果我们传递了锁的超时时间，就发送给redis执行脚本，进行占锁，默认超时就是 我们制定的时间
-        //2、如果我们指定锁的超时时间，就使用 lockWatchdogTimeout = 30 * 1000 【看门狗默认时间】
+        //2、如果我们没有指定锁的超时时间，就使用 lockWatchdogTimeout = 30 * 1000 【看门狗默认时间】
         //只要占锁成功，就会启动一个定时任务【重新给锁设置过期时间，新的过期时间就是看门狗的默认时间】,每隔10秒都会自动的再次续期，续成30秒
         // internalLockLeaseTime 【看门狗时间】 / 3， 10s
         try {
             System.out.println("加锁成功，执行业务..." + Thread.currentThread().getId());
-            try { TimeUnit.SECONDS.sleep(20); } catch (InterruptedException e) { e.printStackTrace(); }
+            try {
+                TimeUnit.SECONDS.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -79,9 +85,8 @@ public class IndexController {
             System.out.println("释放锁..." + Thread.currentThread().getId());
             myLock.unlock();
         }
-
         return "hello";
-    }*/
+    }
 
 
     /**
@@ -92,8 +97,9 @@ public class IndexController {
      * 写 + 写 ：阻塞方式
      * 读 + 写 ：有读锁。写也需要等待
      * 只要有读或者写的存都必须等待
+     *
      * @return
-     *//*
+     */
     @GetMapping(value = "/write")
     @ResponseBody
     public String writeValue() {
@@ -101,22 +107,28 @@ public class IndexController {
         RReadWriteLock readWriteLock = redisson.getReadWriteLock("rw-lock");
         RLock rLock = readWriteLock.writeLock();
         try {
-            //1、改数据加写锁，读数据加读锁
+            //1、改数据加写锁（互斥锁），读数据加读锁（共享锁）
+//            读+读:无锁,并发读只会在redis中记录,会同时加锁成功
+//            写+读：等待写锁释放
+//            写+写：阻塞方式
+//            读+写：写也需要等待
+//            只要有写的存在,都必须等待
             rLock.lock();
+            System.out.println("写锁加锁成功" + Thread.currentThread().getName());
             s = UUID.randomUUID().toString();
             ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
-            ops.set("writeValue",s);
-            TimeUnit.SECONDS.sleep(10);
+            ops.set("writeValue", s);
+            TimeUnit.SECONDS.sleep(30);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             rLock.unlock();
+            System.out.println("写锁释放成功" + Thread.currentThread().getName());
         }
-
         return s;
-    }*/
+    }
 
-    /*@GetMapping(value = "/read")
+    @GetMapping(value = "/read")
     @ResponseBody
     public String readValue() {
         String s = "";
@@ -125,31 +137,35 @@ public class IndexController {
         RLock rLock = readWriteLock.readLock();
         try {
             rLock.lock();
+            System.out.println("读锁加锁成功" + Thread.currentThread().getName());
             ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
             s = ops.get("writeValue");
-            try { TimeUnit.SECONDS.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
+            try {
+                TimeUnit.SECONDS.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             rLock.unlock();
+            System.out.println("写锁释放成功" + Thread.currentThread().getName());
         }
 
         return s;
     }
-*/
 
     /**
      * 车库停车
      * 3车位
      * 信号量也可以做分布式限流
      */
-    /*@GetMapping(value = "/park")
+    @GetMapping(value = "/park")
     @ResponseBody
     public String park() throws InterruptedException {
-
         RSemaphore park = redisson.getSemaphore("park");
-        park.acquire();     //获取一个信号、获取一个值,占一个车位
-        boolean flag = park.tryAcquire();
+//        park.acquire();     //获取一个信号、获取一个值,占一个车位,阻塞时等待
+        boolean flag = park.tryAcquire();//非阻塞,有了停车,没有不停
 
         if (flag) {
             //执行业务
@@ -166,7 +182,7 @@ public class IndexController {
         RSemaphore park = redisson.getSemaphore("park");
         park.release();     //释放一个车位
         return "ok";
-    }*/
+    }
 
 
     /**
@@ -176,24 +192,22 @@ public class IndexController {
      * 分布式闭锁
      */
 
-    /*@GetMapping(value = "/lockDoor")
+    @GetMapping(value = "/lockDoor")
     @ResponseBody
     public String lockDoor() throws InterruptedException {
-
         RCountDownLatch door = redisson.getCountDownLatch("door");
         door.trySetCount(5);
         door.await();       //等待闭锁完成
 
         return "放假了...";
-    }*/
+    }
 
-    /*@GetMapping(value = "/gogogo/{id}")
+    @GetMapping(value = "/gogogo/{id}")
     @ResponseBody
     public String gogogo(@PathVariable("id") Long id) {
         RCountDownLatch door = redisson.getCountDownLatch("door");
         door.countDown();       //计数-1
 
         return id + "班的人都走了...";
-    }*/
-
+    }
 }
