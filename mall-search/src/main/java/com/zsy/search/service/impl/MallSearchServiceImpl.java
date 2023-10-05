@@ -113,7 +113,7 @@ public class MallSearchServiceImpl implements MallSearchService {
                 esModels.add(esModel);
             }
         }
-        result.setProduct(esModels);
+        result.setProducts(esModels);
 
         //2、当前商品涉及到的所有属性信息
         List<SearchResult.AttrVo> attrVos = new ArrayList<>();

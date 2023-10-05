@@ -37,7 +37,7 @@ public class SearchParam {
     private Integer hasStock;
 
     /**
-     * 价格区间查询
+     * 价格区间查询,1_500/_500/500_
      */
     private String skuPrice;
 
@@ -55,6 +55,4 @@ public class SearchParam {
      * 原生的所有查询条件
      */
     private String _queryString;
-
-
 }

@@ -43,4 +43,5 @@ class MallProductApplicationTests {
     public void test2() {
         System.out.println(redissonClient);
     }
+
 }

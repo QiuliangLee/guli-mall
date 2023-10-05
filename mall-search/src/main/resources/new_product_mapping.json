@@ -1,4 +1,4 @@
-//PUT mall_product
+//PUT gulimall_product
 {
   "mappings": {
     "properties": {

@@ -56,6 +56,6 @@ public interface CategoryService extends IService<CategoryEntity> {
      *
      * @return
      */
-    Map<String, List<Catalogs2Vo>> getCatalogJsonFromDbWithRedissonLock();
+    Map<String, List<Catalogs2Vo>> getCatalogJsonFromDbWithSpringCache();
 }
 
