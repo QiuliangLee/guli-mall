@@ -14,7 +14,7 @@ public class SearchResult {
     /**
      * 查询到的所有商品信息
      */
-    private List<SkuEsModel> products;
+    private List<SkuEsModel> product;
 
     /**
      * 当前页码

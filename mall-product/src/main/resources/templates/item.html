@@ -348,7 +348,7 @@
               </ul>
               <ul class="con-ul">
                 <li>
-                  <img src="/static/item/img/599a806bN9d829c1c.jpg" alt=""/>
+                  <img alt="" src="/static/item/img/599a806bN9d829c1c_1.jpg"/>
                 </li>
                 <li>
                   <p>
@@ -1359,7 +1359,7 @@
 <script>
   $(".sku_attr_value").click(function () {
     // 1、点击的元素添加上自定义的属性
-    let skus = new Array();
+    let skus = [];
     let curr = $(this).attr("skus").split(",");
 
     $(this).parent().parent().find(".sku_attr_value").removeClass("checked");
@@ -1386,7 +1386,7 @@
   function changeCheckedStyle() {
     $(".sku_attr_value").parent().css({"border": "solid 1px #ccc"});
     $("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
-  };
+  }
 
 
   $(".addToCart").click(function () {

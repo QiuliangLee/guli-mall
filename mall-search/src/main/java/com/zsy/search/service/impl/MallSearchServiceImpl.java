@@ -113,7 +113,7 @@ public class MallSearchServiceImpl implements MallSearchService {
                 esModels.add(esModel);
             }
         }
-        result.setProducts(esModels);
+        result.setProduct(esModels);
 
         //2、当前商品涉及到的所有属性信息
         List<SearchResult.AttrVo> attrVos = new ArrayList<>();
@@ -224,11 +224,11 @@ public class MallSearchServiceImpl implements MallSearchService {
                 String encode = null;
                 try {
                     encode = URLEncoder.encode(attr, "UTF-8");
-                    encode.replace("+", "%20");  //浏览器对空格的编码和Java不一样，差异化处理
+                    encode = encode.replace("+", "%20");  //浏览器对空格的编码和Java不一样，差异化处理
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                String replace = param.get_queryString().replace("&attrs=" + attr, "");
+                String replace = param.get_queryString().replace("&attrs=" + encode, "");
                 navVo.setLink("http://search.gulimall.com/list.html?" + replace);
 
                 return navVo;
