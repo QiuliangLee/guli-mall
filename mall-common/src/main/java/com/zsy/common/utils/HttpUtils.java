@@ -30,11 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Description:
- * @author: liqiuliang
- * @createTime: 2021-04-22 09:33
- **/
 public class HttpUtils {
 
     /**
@@ -164,7 +159,6 @@ public class HttpUtils {
 
     /**
      * Put String
-     *
      * @param host
      * @param path
      * @param method
@@ -195,7 +189,6 @@ public class HttpUtils {
 
     /**
      * Put stream
-     *
      * @param host
      * @param path
      * @param method
@@ -293,17 +286,12 @@ public class HttpUtils {
         try {
             SSLContext ctx = SSLContext.getInstance("TLS");
             X509TrustManager tm = new X509TrustManager() {
-                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
-
-                @Override
                 public void checkClientTrusted(X509Certificate[] xcs, String str) {
 
                 }
-
-                @Override
                 public void checkServerTrusted(X509Certificate[] xcs, String str) {
 
                 }
@@ -320,5 +308,4 @@ public class HttpUtils {
             throw new RuntimeException(ex);
         }
     }
-
 }

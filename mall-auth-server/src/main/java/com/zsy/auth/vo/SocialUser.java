@@ -19,5 +19,4 @@ public class SocialUser {
     private String uid;
 
     private String isRealName;
-
 }

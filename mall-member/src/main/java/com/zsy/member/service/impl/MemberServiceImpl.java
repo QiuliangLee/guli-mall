@@ -51,7 +51,6 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
 
     @Override
     public void register(MemberUserRegisterVo vo) {
-
         MemberEntity memberEntity = new MemberEntity();
 
         //设置默认等级
@@ -79,20 +78,15 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
 
     @Override
     public void checkPhoneUnique(String phone) throws PhoneException {
-
         Integer phoneCount = this.baseMapper.selectCount(new QueryWrapper<MemberEntity>().eq("mobile", phone));
-
         if (phoneCount > 0) {
             throw new PhoneException();
         }
-
     }
 
     @Override
     public void checkUserNameUnique(String userName) throws UsernameException {
-
         Integer usernameCount = this.baseMapper.selectCount(new QueryWrapper<MemberEntity>().eq("username", userName));
-
         if (usernameCount > 0) {
             throw new UsernameException();
         }

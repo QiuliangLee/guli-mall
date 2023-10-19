@@ -35,7 +35,6 @@ public class MemberController {
 
     @PostMapping(value = "/register")
     public R register(@RequestBody MemberUserRegisterVo vo) {
-
         try {
             memberService.register(vo);
         } catch (PhoneException e) {
@@ -43,14 +42,11 @@ public class MemberController {
         } catch (UsernameException e) {
             return R.error(BizCodeEnum.USER_EXIST_EXCEPTION.getCode(), BizCodeEnum.USER_EXIST_EXCEPTION.getMsg());
         }
-
         return R.ok();
     }
 
-
     @PostMapping(value = "/login")
     public R login(@RequestBody MemberUserLoginVo vo) {
-
         MemberEntity memberEntity = memberService.login(vo);
 
         if (memberEntity != null) {

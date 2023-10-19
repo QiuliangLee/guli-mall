@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -29,6 +30,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.zsy.common.constant.AuthServerConstant.LOGIN_USER;
+
+//import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @author: liqiuliang
@@ -78,9 +81,9 @@ public class LoginController {
 
 
     /**
-     * TODO: 重定向携带数据：利用session原理，将数据放在session中。
-     * TODO:只要跳转到下一个页面取出这个数据以后，session里面的数据就会删掉
-     * TODO：分布下session问题
+     * 重定向携带数据：利用session原理，将数据放在session中。
+     * 只要跳转到下一个页面取出这个数据以后，session里面的数据就会删掉
+     * 分布下session问题
      * RedirectAttributes：重定向也可以保留数据，不会丢失
      * 用户注册
      *
@@ -151,7 +154,6 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     public String login(UserLoginVo vo, RedirectAttributes attributes, HttpSession session) {
-
         //远程登录
         R login = memberFeignService.login(vo);
 
@@ -170,11 +172,10 @@ public class LoginController {
     }
 
 
-    // @GetMapping(value = "/loguot.html")
-    // public String logout(HttpServletRequest request) {
-    //     request.getSession().removeAttribute(LOGIN_USER);
-    //     request.getSession().invalidate();
-    //     return "redirect:http://gulimall.com";
-    // }
-
+    @GetMapping(value = "/loguot.html")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute(LOGIN_USER);
+        request.getSession().invalidate();
+        return "redirect:http://gulimall.com";
+    }
 }

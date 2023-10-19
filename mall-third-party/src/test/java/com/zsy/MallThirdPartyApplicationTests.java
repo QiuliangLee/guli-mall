@@ -32,7 +32,7 @@ class MallThirdPartyApplicationTests {
 
     @Test
     public void sendSmsCode() {
-        smsComponent.sendCode("13838383838", "134531");
+        smsComponent.sendCode("15687176251", "134531");
     }
 
     @Test
@@ -57,13 +57,13 @@ class MallThirdPartyApplicationTests {
         String host = "https://smsmsgs.market.alicloudapi.com";
         String path = "/sms/";
         String method = "GET";
-        String appcode = "93b7e19861a24c519a7548b17dc16d75";
+        String appcode = "f045cfc810f549ae8afdda7037ef1516";
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> queries = new HashMap<String, String>();
         queries.put("code", "12345678");
-        queries.put("phone", "13838383838");
+        queries.put("phone", "15687176251");
         queries.put("skin", "1");
         queries.put("sign", "175622");
         //JDK 1.8示例代码请在这里下载：  http://code.fegine.com/Tools.zip
@@ -89,5 +89,10 @@ class MallThirdPartyApplicationTests {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testSendSMS() {
+        smsComponent.sendCode("15687176251", "123456");
     }
 }

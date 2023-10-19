@@ -4,14 +4,15 @@ spring:
       discovery:
         server-addr: localhost:8848
     alicloud:
-#      sms:
-      #        host: https://fesms.market.alicloudapi.com
-      #        path: /sms/
-      #        skin: 1
-      #        sign: 175622
-      #        appcode: b0563c23aff8428c97a54d4f7f9e28e5
-      access-key: LTAI5tKGYbFWnebzfjGc6UrJ
-      secret-key: HdDSDZWcFOLblwDe6EqtaBAUK9BN1d
+      sms:
+        host: http://notifysms.market.alicloudapi.com
+        path: /send
+        method: POST
+        appcode: f045cfc810f549ae8afdda7037ef1516
+        template_code: T0001
+        sign_name: 复数科技
+      access-key: 204445901
+      secret-key: PjnaHPwCaVVZ8OdtDLy5kkqaEGtPpFmS
       oss:
         endpoint: oss-cn-shanghai.aliyuncs.com
         bucket: gulimall-lucas2
