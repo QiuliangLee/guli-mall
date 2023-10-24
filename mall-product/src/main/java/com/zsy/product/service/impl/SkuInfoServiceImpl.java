@@ -1,36 +1,30 @@
 package com.zsy.product.service.impl;
 
-import com.alibaba.fastjson.TypeReference;
-import com.zsy.common.utils.R;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsy.common.utils.PageUtils;
+import com.zsy.common.utils.Query;
+import com.zsy.product.dao.SkuInfoDao;
 import com.zsy.product.entity.SkuImagesEntity;
+import com.zsy.product.entity.SkuInfoEntity;
 import com.zsy.product.entity.SpuInfoDescEntity;
 import com.zsy.product.feign.SeckillFeignService;
 import com.zsy.product.service.*;
-import com.zsy.product.vo.SeckillSkuVo;
 import com.zsy.product.vo.SkuItemSaleAttrVo;
 import com.zsy.product.vo.SkuItemVo;
 import com.zsy.product.vo.SpuItemAttrGroupVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zsy.common.utils.PageUtils;
-import com.zsy.common.utils.Query;
-
-import com.zsy.product.dao.SkuInfoDao;
-import com.zsy.product.entity.SkuInfoEntity;
-import org.springframework.util.StringUtils;
-
-import javax.annotation.Resource;
 
 /**
  * @author ZSY
@@ -163,7 +157,6 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
             List<SpuItemAttrGroupVo> attrGroupVos = attrGroupService.getAttrGroupWithAttrsBySpuId(res.getSpuId(), res.getCatalogId());
             skuItemVo.setGroupAttrs(attrGroupVos);
         }, executor);
-
 
         // Long spuId = info.getSpuId();
         // Long catalogId = info.getCatalogId();
