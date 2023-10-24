@@ -35,6 +35,7 @@ class MallProductApplicationTests {
         String hello = ops.get("hello");
         System.out.println(hello);
         System.out.println(1);
+        System.out.println(2);
     }
 
     @Autowired
