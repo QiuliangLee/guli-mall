@@ -34,6 +34,7 @@ class MallProductApplicationTests {
         ops.set("hello", "workd" + UUID.randomUUID());
         String hello = ops.get("hello");
         System.out.println(hello);
+        System.out.println(1);
     }
 
     @Autowired
