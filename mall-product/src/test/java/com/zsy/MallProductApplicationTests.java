@@ -33,7 +33,7 @@ class MallProductApplicationTests {
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
         ops.set("hello", "workd" + UUID.randomUUID());
         String hello = ops.get("hello");
-        System.out.println("d23");
+        System.out.println("d234");
     }
 
     @Autowired
