@@ -1,21 +1,22 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-    <el-form-item label="专题名字" prop="name">
-      <el-input v-model="dataForm.name" placeholder="专题名字"></el-input>
-    </el-form-item>
-    <el-form-item label="专题id" prop="subjectId">
-      <el-input v-model="dataForm.subjectId" placeholder="专题id"></el-input>
-    </el-form-item>
-    <el-form-item label="spu_id" prop="spuId">
-      <el-input v-model="dataForm.spuId" placeholder="spu_id"></el-input>
-    </el-form-item>
-    <el-form-item label="排序" prop="sort">
-      <el-input v-model="dataForm.sort" placeholder="排序"></el-input>
-    </el-form-item>
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="120px"
+             @keyup.enter.native="dataFormSubmit()">
+      <el-form-item label="专题名字" prop="name">
+        <el-input v-model="dataForm.name" placeholder="专题名字"></el-input>
+      </el-form-item>
+      <el-form-item label="专题id" prop="subjectId">
+        <el-input v-model="dataForm.subjectId" placeholder="专题id"></el-input>
+      </el-form-item>
+      <el-form-item label="spu_id" prop="spuId">
+        <el-input v-model="dataForm.spuId" placeholder="spu_id"></el-input>
+      </el-form-item>
+      <el-form-item label="排序" prop="sort">
+        <el-input v-model="dataForm.sort" placeholder="排序"></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -26,7 +27,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {
@@ -38,22 +39,22 @@
         },
         dataRule: {
           name: [
-            { required: true, message: '专题名字不能为空', trigger: 'blur' }
+            {required: true, message: '专题名字不能为空', trigger: 'blur'}
           ],
           subjectId: [
-            { required: true, message: '专题id不能为空', trigger: 'blur' }
+            {required: true, message: '专题id不能为空', trigger: 'blur'}
           ],
           spuId: [
-            { required: true, message: 'spu_id不能为空', trigger: 'blur' }
+            {required: true, message: 'spu_id不能为空', trigger: 'blur'}
           ],
           sort: [
-            { required: true, message: '排序不能为空', trigger: 'blur' }
+            {required: true, message: '排序不能为空', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -75,7 +76,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

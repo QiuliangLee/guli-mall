@@ -89,6 +89,6 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
 
         //1、查出当前spu对应的所有属性的分组信息以及当前分组下的所有属性对应的值
         AttrGroupDao baseMapper = this.getBaseMapper();
-        return baseMapper.getAttrGroupWithAttrsBySpuId(spuId,catalogId);
+        return baseMapper.getAttrGroupWithAttrsBySpuId(spuId, catalogId);
     }
 }

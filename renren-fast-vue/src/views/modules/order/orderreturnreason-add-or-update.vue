@@ -1,21 +1,22 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-    <el-form-item label="退货原因名" prop="name">
-      <el-input v-model="dataForm.name" placeholder="退货原因名"></el-input>
-    </el-form-item>
-    <el-form-item label="排序" prop="sort">
-      <el-input v-model="dataForm.sort" placeholder="排序"></el-input>
-    </el-form-item>
-    <el-form-item label="启用状态" prop="status">
-      <el-input v-model="dataForm.status" placeholder="启用状态"></el-input>
-    </el-form-item>
-    <el-form-item label="create_time" prop="createTime">
-      <el-input v-model="dataForm.createTime" placeholder="create_time"></el-input>
-    </el-form-item>
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="120px"
+             @keyup.enter.native="dataFormSubmit()">
+      <el-form-item label="退货原因名" prop="name">
+        <el-input v-model="dataForm.name" placeholder="退货原因名"></el-input>
+      </el-form-item>
+      <el-form-item label="排序" prop="sort">
+        <el-input v-model="dataForm.sort" placeholder="排序"></el-input>
+      </el-form-item>
+      <el-form-item label="启用状态" prop="status">
+        <el-input v-model="dataForm.status" placeholder="启用状态"></el-input>
+      </el-form-item>
+      <el-form-item label="create_time" prop="createTime">
+        <el-input v-model="dataForm.createTime" placeholder="create_time"></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -26,7 +27,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {
@@ -38,22 +39,22 @@
         },
         dataRule: {
           name: [
-            { required: true, message: '退货原因名不能为空', trigger: 'blur' }
+            {required: true, message: '退货原因名不能为空', trigger: 'blur'}
           ],
           sort: [
-            { required: true, message: '排序不能为空', trigger: 'blur' }
+            {required: true, message: '排序不能为空', trigger: 'blur'}
           ],
           status: [
-            { required: true, message: '启用状态不能为空', trigger: 'blur' }
+            {required: true, message: '启用状态不能为空', trigger: 'blur'}
           ],
           createTime: [
-            { required: true, message: 'create_time不能为空', trigger: 'blur' }
+            {required: true, message: 'create_time不能为空', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -75,7 +76,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

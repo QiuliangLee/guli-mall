@@ -1,17 +1,18 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="80px"
+             @keyup.enter.native="dataFormSubmit()">
       <el-form-item label="用户名" prop="userName">
         <el-input v-model="dataForm.userName" placeholder="登录帐号"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password" :class="{ 'is-required': !dataForm.id }">
-        <el-input v-model="dataForm.password" type="password" placeholder="密码"></el-input>
+      <el-form-item :class="{ 'is-required': !dataForm.id }" label="密码" prop="password">
+        <el-input v-model="dataForm.password" placeholder="密码" type="password"></el-input>
       </el-form-item>
-      <el-form-item label="确认密码" prop="comfirmPassword" :class="{ 'is-required': !dataForm.id }">
-        <el-input v-model="dataForm.comfirmPassword" type="password" placeholder="确认密码"></el-input>
+      <el-form-item :class="{ 'is-required': !dataForm.id }" label="确认密码" prop="comfirmPassword">
+        <el-input v-model="dataForm.comfirmPassword" placeholder="确认密码" type="password"></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="dataForm.email" placeholder="邮箱"></el-input>
@@ -19,12 +20,13 @@
       <el-form-item label="手机号" prop="mobile">
         <el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
       </el-form-item>
-      <el-form-item label="角色" size="mini" prop="roleIdList">
+      <el-form-item label="角色" prop="roleIdList" size="mini">
         <el-checkbox-group v-model="dataForm.roleIdList">
-          <el-checkbox v-for="role in roleList" :key="role.roleId" :label="role.roleId">{{ role.roleName }}</el-checkbox>
+          <el-checkbox v-for="role in roleList" :key="role.roleId" :label="role.roleId">{{ role.roleName }}
+          </el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="状态" size="mini" prop="status">
+      <el-form-item label="状态" prop="status" size="mini">
         <el-radio-group v-model="dataForm.status">
           <el-radio :label="0">禁用</el-radio>
           <el-radio :label="1">正常</el-radio>
@@ -39,9 +41,10 @@
 </template>
 
 <script>
-  import { isEmail, isMobile } from '@/utils/validate'
+  import {isEmail, isMobile} from '@/utils/validate'
+
   export default {
-    data () {
+    data() {
       var validatePassword = (rule, value, callback) => {
         if (!this.dataForm.id && !/\S/.test(value)) {
           callback(new Error('密码不能为空'))
@@ -88,27 +91,27 @@
         },
         dataRule: {
           userName: [
-            { required: true, message: '用户名不能为空', trigger: 'blur' }
+            {required: true, message: '用户名不能为空', trigger: 'blur'}
           ],
           password: [
-            { validator: validatePassword, trigger: 'blur' }
+            {validator: validatePassword, trigger: 'blur'}
           ],
           comfirmPassword: [
-            { validator: validateComfirmPassword, trigger: 'blur' }
+            {validator: validateComfirmPassword, trigger: 'blur'}
           ],
           email: [
-            { required: true, message: '邮箱不能为空', trigger: 'blur' },
-            { validator: validateEmail, trigger: 'blur' }
+            {required: true, message: '邮箱不能为空', trigger: 'blur'},
+            {validator: validateEmail, trigger: 'blur'}
           ],
           mobile: [
-            { required: true, message: '手机号不能为空', trigger: 'blur' },
-            { validator: validateMobile, trigger: 'blur' }
+            {required: true, message: '手机号不能为空', trigger: 'blur'},
+            {validator: validateMobile, trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.$http({
           url: this.$http.adornUrl('/sys/role/select'),
@@ -141,7 +144,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

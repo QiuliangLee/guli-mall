@@ -159,6 +159,7 @@ public class HttpUtils {
 
     /**
      * Put String
+     *
      * @param host
      * @param path
      * @param method
@@ -189,6 +190,7 @@ public class HttpUtils {
 
     /**
      * Put stream
+     *
      * @param host
      * @param path
      * @param method
@@ -289,9 +291,11 @@ public class HttpUtils {
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
+
                 public void checkClientTrusted(X509Certificate[] xcs, String str) {
 
                 }
+
                 public void checkServerTrusted(X509Certificate[] xcs, String str) {
 
                 }

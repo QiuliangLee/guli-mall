@@ -1,10 +1,11 @@
 <template>
   <el-dialog
-    title="云存储配置"
     :close-on-click-modal="false"
-    :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-      <el-form-item size="mini" label="存储类型">
+    :visible.sync="visible"
+    title="云存储配置">
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="120px"
+             @keyup.enter.native="dataFormSubmit()">
+      <el-form-item label="存储类型" size="mini">
         <el-radio-group v-model="dataForm.type">
           <el-radio :label="1">七牛</el-radio>
           <el-radio :label="2">阿里云</el-radio>
@@ -84,7 +85,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {},
@@ -92,7 +93,7 @@
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.visible = true
         this.$http({
           url: this.$http.adornUrl('/sys/oss/config'),
@@ -103,7 +104,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

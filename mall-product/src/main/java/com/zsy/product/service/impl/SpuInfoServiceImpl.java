@@ -46,22 +46,16 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
     @Autowired
     ProductAttrValueService attrValueService;
-
-    @Autowired
-    private ProductAttrValueService productAttrValueService;
-
     @Autowired
     SkuInfoService skuInfoService;
-
     @Autowired
     SkuImagesService skuImagesService;
-
     @Autowired
     SkuSaleAttrValueService skuSaleAttrValueService;
-
     @Autowired
     CouponFeignService couponFeignService;
-
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
     @Autowired
     private BrandService brandService;
 

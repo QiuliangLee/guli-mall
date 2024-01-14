@@ -4,60 +4,60 @@
       <el-form-item>
         <el-button type="primary" @click="configHandle()">云存储配置</el-button>
         <el-button type="primary" @click="uploadHandle()">上传文件</el-button>
-        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button :disabled="dataListSelections.length <= 0" type="danger" @click="deleteHandle()">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
+      v-loading="dataListLoading"
       :data="dataList"
       border
-      v-loading="dataListLoading"
-      @selection-change="selectionChangeHandle"
-      style="width: 100%;">
+      style="width: 100%;"
+      @selection-change="selectionChangeHandle">
       <el-table-column
-        type="selection"
-        header-align="center"
         align="center"
+        header-align="center"
+        type="selection"
         width="50">
       </el-table-column>
       <el-table-column
+        align="center"
+        header-align="center"
+        label="ID"
         prop="id"
-        header-align="center"
-        align="center"
-        width="80"
-        label="ID">
+        width="80">
       </el-table-column>
       <el-table-column
-        prop="url"
-        header-align="center"
         align="center"
-        label="URL地址">
+        header-align="center"
+        label="URL地址"
+        prop="url">
       </el-table-column>
       <el-table-column
+        align="center"
+        header-align="center"
+        label="创建时间"
         prop="createDate"
-        header-align="center"
-        align="center"
-        width="180"
-        label="创建时间">
+        width="180">
       </el-table-column>
       <el-table-column
+        align="center"
         fixed="right"
         header-align="center"
-        align="center"
-        width="150"
-        label="操作">
+        label="操作"
+        width="150">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
+          <el-button size="small" type="text" @click="deleteHandle(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-pagination
-      @size-change="sizeChangeHandle"
-      @current-change="currentChangeHandle"
       :current-page="pageIndex"
-      :page-sizes="[10, 20, 50, 100]"
       :page-size="pageSize"
+      :page-sizes="[10, 20, 50, 100]"
       :total="totalPage"
-      layout="total, sizes, prev, pager, next, jumper">
+      layout="total, sizes, prev, pager, next, jumper"
+      @size-change="sizeChangeHandle"
+      @current-change="currentChangeHandle">
     </el-pagination>
     <!-- 弹窗, 云存储配置 -->
     <config v-if="configVisible" ref="config"></config>
@@ -69,8 +69,9 @@
 <script>
   import Config from './oss-config'
   import Upload from './oss-upload'
+
   export default {
-    data () {
+    data() {
       return {
         dataForm: {},
         dataList: [],
@@ -87,12 +88,12 @@
       Config,
       Upload
     },
-    activated () {
+    activated() {
       this.getDataList()
     },
     methods: {
       // 获取数据列表
-      getDataList () {
+      getDataList() {
         this.dataListLoading = true
         this.$http({
           url: this.$http.adornUrl('/sys/oss/list'),
@@ -113,36 +114,36 @@
         })
       },
       // 每页数
-      sizeChangeHandle (val) {
+      sizeChangeHandle(val) {
         this.pageSize = val
         this.pageIndex = 1
         this.getDataList()
       },
       // 当前页
-      currentChangeHandle (val) {
+      currentChangeHandle(val) {
         this.pageIndex = val
         this.getDataList()
       },
       // 多选
-      selectionChangeHandle (val) {
+      selectionChangeHandle(val) {
         this.dataListSelections = val
       },
       // 云存储配置
-      configHandle () {
+      configHandle() {
         this.configVisible = true
         this.$nextTick(() => {
           this.$refs.config.init()
         })
       },
       // 上传文件
-      uploadHandle () {
+      uploadHandle() {
         this.uploadVisible = true
         this.$nextTick(() => {
           this.$refs.upload.init()
         })
       },
       // 删除
-      deleteHandle (id) {
+      deleteHandle(id) {
         var ids = id ? [id] : this.dataListSelections.map(item => {
           return item.id
         })
@@ -169,7 +170,8 @@
               this.$message.error(data.msg)
             }
           })
-        }).catch(() => {})
+        }).catch(() => {
+        })
       }
     }
   }

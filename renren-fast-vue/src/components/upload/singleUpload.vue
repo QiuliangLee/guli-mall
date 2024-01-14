@@ -1,20 +1,20 @@
 <template>
   <div>
     <el-upload
-      action="http://gulimall-lucas2.oss-cn-shanghai.aliyuncs.com"
-      :data="dataObj"
-      list-type="picture"
-      :multiple="false" :show-file-list="showFileList"
-      :file-list="fileList"
       :before-upload="beforeUpload"
+      :data="dataObj"
+      :file-list="fileList"
+      :multiple="false" :on-preview="handlePreview"
       :on-remove="handleRemove"
       :on-success="handleUploadSuccess"
-      :on-preview="handlePreview">
+      :show-file-list="showFileList"
+      action="http://gulimall-lucas2.oss-cn-shanghai.aliyuncs.com"
+      list-type="picture">
       <el-button size="small" type="primary">点击上传</el-button>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过10MB</div>
     </el-upload>
     <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="fileList[0].url" alt="">
+      <img :src="fileList[0].url" alt="" width="100%">
     </el-dialog>
   </div>
 </template>
@@ -46,7 +46,7 @@
       },
       showFileList: {
         get: function () {
-          return this.value !== null && this.value !== ''&& this.value!==undefined;
+          return this.value !== null && this.value !== '' && this.value !== undefined;
         },
         set: function (newValue) {
         }
@@ -80,14 +80,14 @@
         let _self = this;
         return new Promise((resolve, reject) => {
           policy().then(response => {
-            console.log("响应的数据",response);
+            console.log("响应的数据", response);
             _self.dataObj.policy = response.data.policy;
             _self.dataObj.signature = response.data.signature;
             _self.dataObj.ossaccessKeyId = response.data.accessid;
-            _self.dataObj.key = response.data.dir +getUUID()+'_${filename}';
+            _self.dataObj.key = response.data.dir + getUUID() + '_${filename}';
             _self.dataObj.dir = response.data.dir;
             _self.dataObj.host = response.data.host;
-            console.log("响应的数据222。。。",_self.dataObj);
+            console.log("响应的数据222。。。", _self.dataObj);
             resolve(true)
           }).catch(err => {
             reject(false)
@@ -98,7 +98,10 @@
         console.log("上传成功...");
         this.showFileList = true;
         this.fileList.pop();
-        this.fileList.push({name: file.name, url: this.dataObj.host + '/' + this.dataObj.key.replace("${filename}",file.name) });
+        this.fileList.push({
+          name: file.name,
+          url: this.dataObj.host + '/' + this.dataObj.key.replace("${filename}", file.name)
+        });
         this.emitInput(this.fileList[0].url);
       }
     }

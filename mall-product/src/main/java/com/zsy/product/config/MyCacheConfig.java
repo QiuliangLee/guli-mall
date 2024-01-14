@@ -22,7 +22,7 @@ public class MyCacheConfig {
     /**
      * 配置文件的配置没有用上
      * 1. 原来和配置文件绑定的配置类为：@ConfigurationProperties(prefix = "spring.cache")
-     *                                public class CacheProperties
+     * public class CacheProperties
      * <p>
      * 2. 要让他生效，要加上 @EnableConfigurationProperties(CacheProperties.class)
      */

@@ -31,17 +31,17 @@ public class ProductConstant {
 
         private String msg;
 
+        ProductStatusEnum(int code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+
         public int getCode() {
             return code;
         }
 
         public String getMsg() {
             return msg;
-        }
-
-        ProductStatusEnum(int code, String msg) {
-            this.code = code;
-            this.msg = msg;
         }
     }
 }

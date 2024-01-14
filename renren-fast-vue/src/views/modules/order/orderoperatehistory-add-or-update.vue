@@ -1,24 +1,26 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-    <el-form-item label="订单id" prop="orderId">
-      <el-input v-model="dataForm.orderId" placeholder="订单id"></el-input>
-    </el-form-item>
-    <el-form-item label="操作人[用户；系统；后台管理员]" prop="operateMan">
-      <el-input v-model="dataForm.operateMan" placeholder="操作人[用户；系统；后台管理员]"></el-input>
-    </el-form-item>
-    <el-form-item label="操作时间" prop="createTime">
-      <el-input v-model="dataForm.createTime" placeholder="操作时间"></el-input>
-    </el-form-item>
-    <el-form-item label="订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】" prop="orderStatus">
-      <el-input v-model="dataForm.orderStatus" placeholder="订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】"></el-input>
-    </el-form-item>
-    <el-form-item label="备注" prop="note">
-      <el-input v-model="dataForm.note" placeholder="备注"></el-input>
-    </el-form-item>
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="120px"
+             @keyup.enter.native="dataFormSubmit()">
+      <el-form-item label="订单id" prop="orderId">
+        <el-input v-model="dataForm.orderId" placeholder="订单id"></el-input>
+      </el-form-item>
+      <el-form-item label="操作人[用户；系统；后台管理员]" prop="operateMan">
+        <el-input v-model="dataForm.operateMan" placeholder="操作人[用户；系统；后台管理员]"></el-input>
+      </el-form-item>
+      <el-form-item label="操作时间" prop="createTime">
+        <el-input v-model="dataForm.createTime" placeholder="操作时间"></el-input>
+      </el-form-item>
+      <el-form-item label="订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】" prop="orderStatus">
+        <el-input v-model="dataForm.orderStatus"
+                  placeholder="订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】"></el-input>
+      </el-form-item>
+      <el-form-item label="备注" prop="note">
+        <el-input v-model="dataForm.note" placeholder="备注"></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -29,7 +31,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {
@@ -42,25 +44,29 @@
         },
         dataRule: {
           orderId: [
-            { required: true, message: '订单id不能为空', trigger: 'blur' }
+            {required: true, message: '订单id不能为空', trigger: 'blur'}
           ],
           operateMan: [
-            { required: true, message: '操作人[用户；系统；后台管理员]不能为空', trigger: 'blur' }
+            {required: true, message: '操作人[用户；系统；后台管理员]不能为空', trigger: 'blur'}
           ],
           createTime: [
-            { required: true, message: '操作时间不能为空', trigger: 'blur' }
+            {required: true, message: '操作时间不能为空', trigger: 'blur'}
           ],
           orderStatus: [
-            { required: true, message: '订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】不能为空', trigger: 'blur' }
+            {
+              required: true,
+              message: '订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】不能为空',
+              trigger: 'blur'
+            }
           ],
           note: [
-            { required: true, message: '备注不能为空', trigger: 'blur' }
+            {required: true, message: '备注不能为空', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -83,7 +89,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

@@ -28,10 +28,9 @@ import java.util.Map;
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
-    private MemberService memberService;
-
-    @Autowired
     CouponFeignService couponFeignService;
+    @Autowired
+    private MemberService memberService;
 
     @PostMapping(value = "/register")
     public R register(@RequestBody MemberUserRegisterVo vo) {

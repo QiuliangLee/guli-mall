@@ -3,8 +3,8 @@ package com.zsy.member.vo;
 import lombok.Data;
 
 /**
- * @Description: 社交用户信息
  * @author zsy
+ * @Description: 社交用户信息
  * @email 594983498@qq.com
  * @createTime: 2021-04-24 11:04
  **/

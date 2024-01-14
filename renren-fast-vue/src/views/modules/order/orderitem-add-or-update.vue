@@ -1,66 +1,67 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-    <el-form-item label="order_id" prop="orderId">
-      <el-input v-model="dataForm.orderId" placeholder="order_id"></el-input>
-    </el-form-item>
-    <el-form-item label="order_sn" prop="orderSn">
-      <el-input v-model="dataForm.orderSn" placeholder="order_sn"></el-input>
-    </el-form-item>
-    <el-form-item label="spu_id" prop="spuId">
-      <el-input v-model="dataForm.spuId" placeholder="spu_id"></el-input>
-    </el-form-item>
-    <el-form-item label="spu_name" prop="spuName">
-      <el-input v-model="dataForm.spuName" placeholder="spu_name"></el-input>
-    </el-form-item>
-    <el-form-item label="spu_pic" prop="spuPic">
-      <el-input v-model="dataForm.spuPic" placeholder="spu_pic"></el-input>
-    </el-form-item>
-    <el-form-item label="品牌" prop="spuBrand">
-      <el-input v-model="dataForm.spuBrand" placeholder="品牌"></el-input>
-    </el-form-item>
-    <el-form-item label="商品分类id" prop="categoryId">
-      <el-input v-model="dataForm.categoryId" placeholder="商品分类id"></el-input>
-    </el-form-item>
-    <el-form-item label="商品sku编号" prop="skuId">
-      <el-input v-model="dataForm.skuId" placeholder="商品sku编号"></el-input>
-    </el-form-item>
-    <el-form-item label="商品sku名字" prop="skuName">
-      <el-input v-model="dataForm.skuName" placeholder="商品sku名字"></el-input>
-    </el-form-item>
-    <el-form-item label="商品sku图片" prop="skuPic">
-      <el-input v-model="dataForm.skuPic" placeholder="商品sku图片"></el-input>
-    </el-form-item>
-    <el-form-item label="商品sku价格" prop="skuPrice">
-      <el-input v-model="dataForm.skuPrice" placeholder="商品sku价格"></el-input>
-    </el-form-item>
-    <el-form-item label="商品购买的数量" prop="skuQuantity">
-      <el-input v-model="dataForm.skuQuantity" placeholder="商品购买的数量"></el-input>
-    </el-form-item>
-    <el-form-item label="商品销售属性组合（JSON）" prop="skuAttrsVals">
-      <el-input v-model="dataForm.skuAttrsVals" placeholder="商品销售属性组合（JSON）"></el-input>
-    </el-form-item>
-    <el-form-item label="商品促销分解金额" prop="promotionAmount">
-      <el-input v-model="dataForm.promotionAmount" placeholder="商品促销分解金额"></el-input>
-    </el-form-item>
-    <el-form-item label="优惠券优惠分解金额" prop="couponAmount">
-      <el-input v-model="dataForm.couponAmount" placeholder="优惠券优惠分解金额"></el-input>
-    </el-form-item>
-    <el-form-item label="积分优惠分解金额" prop="integrationAmount">
-      <el-input v-model="dataForm.integrationAmount" placeholder="积分优惠分解金额"></el-input>
-    </el-form-item>
-    <el-form-item label="该商品经过优惠后的分解金额" prop="realAmount">
-      <el-input v-model="dataForm.realAmount" placeholder="该商品经过优惠后的分解金额"></el-input>
-    </el-form-item>
-    <el-form-item label="赠送积分" prop="giftIntegration">
-      <el-input v-model="dataForm.giftIntegration" placeholder="赠送积分"></el-input>
-    </el-form-item>
-    <el-form-item label="赠送成长值" prop="giftGrowth">
-      <el-input v-model="dataForm.giftGrowth" placeholder="赠送成长值"></el-input>
-    </el-form-item>
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="120px"
+             @keyup.enter.native="dataFormSubmit()">
+      <el-form-item label="order_id" prop="orderId">
+        <el-input v-model="dataForm.orderId" placeholder="order_id"></el-input>
+      </el-form-item>
+      <el-form-item label="order_sn" prop="orderSn">
+        <el-input v-model="dataForm.orderSn" placeholder="order_sn"></el-input>
+      </el-form-item>
+      <el-form-item label="spu_id" prop="spuId">
+        <el-input v-model="dataForm.spuId" placeholder="spu_id"></el-input>
+      </el-form-item>
+      <el-form-item label="spu_name" prop="spuName">
+        <el-input v-model="dataForm.spuName" placeholder="spu_name"></el-input>
+      </el-form-item>
+      <el-form-item label="spu_pic" prop="spuPic">
+        <el-input v-model="dataForm.spuPic" placeholder="spu_pic"></el-input>
+      </el-form-item>
+      <el-form-item label="品牌" prop="spuBrand">
+        <el-input v-model="dataForm.spuBrand" placeholder="品牌"></el-input>
+      </el-form-item>
+      <el-form-item label="商品分类id" prop="categoryId">
+        <el-input v-model="dataForm.categoryId" placeholder="商品分类id"></el-input>
+      </el-form-item>
+      <el-form-item label="商品sku编号" prop="skuId">
+        <el-input v-model="dataForm.skuId" placeholder="商品sku编号"></el-input>
+      </el-form-item>
+      <el-form-item label="商品sku名字" prop="skuName">
+        <el-input v-model="dataForm.skuName" placeholder="商品sku名字"></el-input>
+      </el-form-item>
+      <el-form-item label="商品sku图片" prop="skuPic">
+        <el-input v-model="dataForm.skuPic" placeholder="商品sku图片"></el-input>
+      </el-form-item>
+      <el-form-item label="商品sku价格" prop="skuPrice">
+        <el-input v-model="dataForm.skuPrice" placeholder="商品sku价格"></el-input>
+      </el-form-item>
+      <el-form-item label="商品购买的数量" prop="skuQuantity">
+        <el-input v-model="dataForm.skuQuantity" placeholder="商品购买的数量"></el-input>
+      </el-form-item>
+      <el-form-item label="商品销售属性组合（JSON）" prop="skuAttrsVals">
+        <el-input v-model="dataForm.skuAttrsVals" placeholder="商品销售属性组合（JSON）"></el-input>
+      </el-form-item>
+      <el-form-item label="商品促销分解金额" prop="promotionAmount">
+        <el-input v-model="dataForm.promotionAmount" placeholder="商品促销分解金额"></el-input>
+      </el-form-item>
+      <el-form-item label="优惠券优惠分解金额" prop="couponAmount">
+        <el-input v-model="dataForm.couponAmount" placeholder="优惠券优惠分解金额"></el-input>
+      </el-form-item>
+      <el-form-item label="积分优惠分解金额" prop="integrationAmount">
+        <el-input v-model="dataForm.integrationAmount" placeholder="积分优惠分解金额"></el-input>
+      </el-form-item>
+      <el-form-item label="该商品经过优惠后的分解金额" prop="realAmount">
+        <el-input v-model="dataForm.realAmount" placeholder="该商品经过优惠后的分解金额"></el-input>
+      </el-form-item>
+      <el-form-item label="赠送积分" prop="giftIntegration">
+        <el-input v-model="dataForm.giftIntegration" placeholder="赠送积分"></el-input>
+      </el-form-item>
+      <el-form-item label="赠送成长值" prop="giftGrowth">
+        <el-input v-model="dataForm.giftGrowth" placeholder="赠送成长值"></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -71,7 +72,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {
@@ -98,67 +99,67 @@
         },
         dataRule: {
           orderId: [
-            { required: true, message: 'order_id不能为空', trigger: 'blur' }
+            {required: true, message: 'order_id不能为空', trigger: 'blur'}
           ],
           orderSn: [
-            { required: true, message: 'order_sn不能为空', trigger: 'blur' }
+            {required: true, message: 'order_sn不能为空', trigger: 'blur'}
           ],
           spuId: [
-            { required: true, message: 'spu_id不能为空', trigger: 'blur' }
+            {required: true, message: 'spu_id不能为空', trigger: 'blur'}
           ],
           spuName: [
-            { required: true, message: 'spu_name不能为空', trigger: 'blur' }
+            {required: true, message: 'spu_name不能为空', trigger: 'blur'}
           ],
           spuPic: [
-            { required: true, message: 'spu_pic不能为空', trigger: 'blur' }
+            {required: true, message: 'spu_pic不能为空', trigger: 'blur'}
           ],
           spuBrand: [
-            { required: true, message: '品牌不能为空', trigger: 'blur' }
+            {required: true, message: '品牌不能为空', trigger: 'blur'}
           ],
           categoryId: [
-            { required: true, message: '商品分类id不能为空', trigger: 'blur' }
+            {required: true, message: '商品分类id不能为空', trigger: 'blur'}
           ],
           skuId: [
-            { required: true, message: '商品sku编号不能为空', trigger: 'blur' }
+            {required: true, message: '商品sku编号不能为空', trigger: 'blur'}
           ],
           skuName: [
-            { required: true, message: '商品sku名字不能为空', trigger: 'blur' }
+            {required: true, message: '商品sku名字不能为空', trigger: 'blur'}
           ],
           skuPic: [
-            { required: true, message: '商品sku图片不能为空', trigger: 'blur' }
+            {required: true, message: '商品sku图片不能为空', trigger: 'blur'}
           ],
           skuPrice: [
-            { required: true, message: '商品sku价格不能为空', trigger: 'blur' }
+            {required: true, message: '商品sku价格不能为空', trigger: 'blur'}
           ],
           skuQuantity: [
-            { required: true, message: '商品购买的数量不能为空', trigger: 'blur' }
+            {required: true, message: '商品购买的数量不能为空', trigger: 'blur'}
           ],
           skuAttrsVals: [
-            { required: true, message: '商品销售属性组合（JSON）不能为空', trigger: 'blur' }
+            {required: true, message: '商品销售属性组合（JSON）不能为空', trigger: 'blur'}
           ],
           promotionAmount: [
-            { required: true, message: '商品促销分解金额不能为空', trigger: 'blur' }
+            {required: true, message: '商品促销分解金额不能为空', trigger: 'blur'}
           ],
           couponAmount: [
-            { required: true, message: '优惠券优惠分解金额不能为空', trigger: 'blur' }
+            {required: true, message: '优惠券优惠分解金额不能为空', trigger: 'blur'}
           ],
           integrationAmount: [
-            { required: true, message: '积分优惠分解金额不能为空', trigger: 'blur' }
+            {required: true, message: '积分优惠分解金额不能为空', trigger: 'blur'}
           ],
           realAmount: [
-            { required: true, message: '该商品经过优惠后的分解金额不能为空', trigger: 'blur' }
+            {required: true, message: '该商品经过优惠后的分解金额不能为空', trigger: 'blur'}
           ],
           giftIntegration: [
-            { required: true, message: '赠送积分不能为空', trigger: 'blur' }
+            {required: true, message: '赠送积分不能为空', trigger: 'blur'}
           ],
           giftGrowth: [
-            { required: true, message: '赠送成长值不能为空', trigger: 'blur' }
+            {required: true, message: '赠送成长值不能为空', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -195,7 +196,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

@@ -1,7 +1,7 @@
 <template>
   <el-table-column :prop="prop" v-bind="$attrs">
     <template slot-scope="scope">
-      <span @click.prevent="toggleHandle(scope.$index, scope.row)" :style="childStyles(scope.row)">
+      <span :style="childStyles(scope.row)" @click.prevent="toggleHandle(scope.$index, scope.row)">
         <i :class="iconClasses(scope.row)" :style="iconStyles(scope.row)"></i>
         {{ scope.row[prop] }}
       </span>
@@ -11,6 +11,7 @@
 
 <script>
   import isArray from 'lodash/isArray'
+
   export default {
     name: 'table-tree-column',
     props: {
@@ -35,20 +36,20 @@
       }
     },
     methods: {
-      childStyles (row) {
-        return { 'padding-left': (row[this.levelKey] > 1 ? row[this.levelKey] * 7 : 0) + 'px' }
+      childStyles(row) {
+        return {'padding-left': (row[this.levelKey] > 1 ? row[this.levelKey] * 7 : 0) + 'px'}
       },
-      iconClasses (row) {
-        return [ !row._expanded ? 'el-icon-caret-right' : 'el-icon-caret-bottom' ]
+      iconClasses(row) {
+        return [!row._expanded ? 'el-icon-caret-right' : 'el-icon-caret-bottom']
       },
-      iconStyles (row) {
-        return { 'visibility': this.hasChild(row) ? 'visible' : 'hidden' }
+      iconStyles(row) {
+        return {'visibility': this.hasChild(row) ? 'visible' : 'hidden'}
       },
-      hasChild (row) {
+      hasChild(row) {
         return (isArray(row[this.childKey]) && row[this.childKey].length >= 1) || false
       },
       // 切换处理
-      toggleHandle (index, row) {
+      toggleHandle(index, row) {
         if (this.hasChild(row)) {
           var data = this.$parent.store.states.data.slice(0)
           data[index]._expanded = !data[index]._expanded
@@ -64,7 +65,7 @@
         }
       },
       // 移除子节点
-      removeChildNode (data, parentId) {
+      removeChildNode(data, parentId) {
         var parentIds = isArray(parentId) ? parentId : [parentId]
         if (parentId.length <= 0) {
           return data

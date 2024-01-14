@@ -62,6 +62,7 @@ class MallSearchApplicationTests {
 
     /**
      * 检索地址中带有 mill 的人员年龄分布和平均薪资
+     *
      * @throws IOException
      */
     @Test

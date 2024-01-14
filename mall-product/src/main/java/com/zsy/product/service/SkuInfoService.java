@@ -21,6 +21,7 @@ public interface SkuInfoService extends IService<SkuInfoEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void saveSkuInfo(SkuInfoEntity skuInfoEntity);
+
     PageUtils queryPageByCondition(Map<String, Object> params);
 
     /**
@@ -30,6 +31,7 @@ public interface SkuInfoService extends IService<SkuInfoEntity> {
      * @return
      */
     List<SkuInfoEntity> getSkusBySpuId(Long spuId);
+
     SkuItemVo item(Long skuId) throws ExecutionException, InterruptedException;
 }
 

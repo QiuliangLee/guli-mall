@@ -1,8 +1,8 @@
 <template>
   <svg
     :class="getClassName"
-    :width="width"
     :height="height"
+    :width="width"
     aria-hidden="true">
     <use :xlink:href="getName"></use>
   </svg>
@@ -27,10 +27,10 @@
       }
     },
     computed: {
-      getName () {
+      getName() {
         return `#icon-${this.name}`
       },
-      getClassName () {
+      getClassName() {
         return [
           'icon-svg',
           `icon-svg__${this.name}`,

@@ -1,9 +1,10 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="100px">
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="100px"
+             @keyup.enter.native="dataFormSubmit()">
       <el-form-item label="bean名称" prop="beanName">
         <el-input v-model="dataForm.beanName" placeholder="spring bean名称, 如: testTask"></el-input>
       </el-form-item>
@@ -26,7 +27,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {
@@ -39,16 +40,16 @@
         },
         dataRule: {
           beanName: [
-            { required: true, message: '用户名不能为空', trigger: 'blur' }
+            {required: true, message: '用户名不能为空', trigger: 'blur'}
           ],
           cronExpression: [
-            { required: true, message: 'cron表达式不能为空', trigger: 'blur' }
+            {required: true, message: 'cron表达式不能为空', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -71,7 +72,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

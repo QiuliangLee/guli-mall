@@ -1,27 +1,28 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    :title="!dataForm.id ? '新增' : '修改'"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-    <el-form-item label="退款的订单" prop="orderReturnId">
-      <el-input v-model="dataForm.orderReturnId" placeholder="退款的订单"></el-input>
-    </el-form-item>
-    <el-form-item label="退款金额" prop="refund">
-      <el-input v-model="dataForm.refund" placeholder="退款金额"></el-input>
-    </el-form-item>
-    <el-form-item label="退款交易流水号" prop="refundSn">
-      <el-input v-model="dataForm.refundSn" placeholder="退款交易流水号"></el-input>
-    </el-form-item>
-    <el-form-item label="退款状态" prop="refundStatus">
-      <el-input v-model="dataForm.refundStatus" placeholder="退款状态"></el-input>
-    </el-form-item>
-    <el-form-item label="退款渠道[1-支付宝，2-微信，3-银联，4-汇款]" prop="refundChannel">
-      <el-input v-model="dataForm.refundChannel" placeholder="退款渠道[1-支付宝，2-微信，3-银联，4-汇款]"></el-input>
-    </el-form-item>
-    <el-form-item label="" prop="refundContent">
-      <el-input v-model="dataForm.refundContent" placeholder=""></el-input>
-    </el-form-item>
+    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="120px"
+             @keyup.enter.native="dataFormSubmit()">
+      <el-form-item label="退款的订单" prop="orderReturnId">
+        <el-input v-model="dataForm.orderReturnId" placeholder="退款的订单"></el-input>
+      </el-form-item>
+      <el-form-item label="退款金额" prop="refund">
+        <el-input v-model="dataForm.refund" placeholder="退款金额"></el-input>
+      </el-form-item>
+      <el-form-item label="退款交易流水号" prop="refundSn">
+        <el-input v-model="dataForm.refundSn" placeholder="退款交易流水号"></el-input>
+      </el-form-item>
+      <el-form-item label="退款状态" prop="refundStatus">
+        <el-input v-model="dataForm.refundStatus" placeholder="退款状态"></el-input>
+      </el-form-item>
+      <el-form-item label="退款渠道[1-支付宝，2-微信，3-银联，4-汇款]" prop="refundChannel">
+        <el-input v-model="dataForm.refundChannel" placeholder="退款渠道[1-支付宝，2-微信，3-银联，4-汇款]"></el-input>
+      </el-form-item>
+      <el-form-item label="" prop="refundContent">
+        <el-input v-model="dataForm.refundContent" placeholder=""></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -32,7 +33,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         visible: false,
         dataForm: {
@@ -46,28 +47,28 @@
         },
         dataRule: {
           orderReturnId: [
-            { required: true, message: '退款的订单不能为空', trigger: 'blur' }
+            {required: true, message: '退款的订单不能为空', trigger: 'blur'}
           ],
           refund: [
-            { required: true, message: '退款金额不能为空', trigger: 'blur' }
+            {required: true, message: '退款金额不能为空', trigger: 'blur'}
           ],
           refundSn: [
-            { required: true, message: '退款交易流水号不能为空', trigger: 'blur' }
+            {required: true, message: '退款交易流水号不能为空', trigger: 'blur'}
           ],
           refundStatus: [
-            { required: true, message: '退款状态不能为空', trigger: 'blur' }
+            {required: true, message: '退款状态不能为空', trigger: 'blur'}
           ],
           refundChannel: [
-            { required: true, message: '退款渠道[1-支付宝，2-微信，3-银联，4-汇款]不能为空', trigger: 'blur' }
+            {required: true, message: '退款渠道[1-支付宝，2-微信，3-银联，4-汇款]不能为空', trigger: 'blur'}
           ],
           refundContent: [
-            { required: true, message: '不能为空', trigger: 'blur' }
+            {required: true, message: '不能为空', trigger: 'blur'}
           ]
         }
       }
     },
     methods: {
-      init (id) {
+      init(id) {
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -91,7 +92,7 @@
         })
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({

@@ -28,27 +28,6 @@ public class R extends HashMap<String, Object> {
         put("msg", "success");
     }
 
-    public R setData(Object data) {
-        put("data", data);
-        return this;
-    }
-
-    // 利用fastjson进行反序列化
-    public <T> T getData(TypeReference<T> typeReference) {
-        // 默认是map
-        Object data = get("data");
-        String jsonString = JSON.toJSONString(data);
-        return JSON.parseObject(jsonString, typeReference);
-    }
-
-    // 利用fastjson进行反序列化
-    public <T> T getData(String key, TypeReference<T> typeReference) {
-        // 默认是map
-        Object data = get(key);
-        String jsonString = JSON.toJSONString(data);
-        return JSON.parseObject(jsonString, typeReference);
-    }
-
     public static R error() {
         return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
     }
@@ -78,6 +57,27 @@ public class R extends HashMap<String, Object> {
 
     public static R ok() {
         return new R();
+    }
+
+    public R setData(Object data) {
+        put("data", data);
+        return this;
+    }
+
+    // 利用fastjson进行反序列化
+    public <T> T getData(TypeReference<T> typeReference) {
+        // 默认是map
+        Object data = get("data");
+        String jsonString = JSON.toJSONString(data);
+        return JSON.parseObject(jsonString, typeReference);
+    }
+
+    // 利用fastjson进行反序列化
+    public <T> T getData(String key, TypeReference<T> typeReference) {
+        // 默认是map
+        Object data = get(key);
+        String jsonString = JSON.toJSONString(data);
+        return JSON.parseObject(jsonString, typeReference);
     }
 
     @Override

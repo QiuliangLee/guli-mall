@@ -30,16 +30,13 @@ import com.zsy.common.utils.R;
 @RequestMapping("product/attrgroup")
 public class AttrGroupController {
     @Autowired
-    private AttrGroupService attrGroupService;
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
     AttrService attrService;
-
     @Autowired
     AttrAttrgroupRelationService relationService;
+    @Autowired
+    private AttrGroupService attrGroupService;
+    @Autowired
+    private CategoryService categoryService;
 
     ///product/attrgroup/attr/relation
     @PostMapping("/attr/relation")

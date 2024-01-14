@@ -23,6 +23,7 @@ public interface WareSkuService extends IService<WareSkuEntity> {
 
     /**
      * 判断是否有库存
+     *
      * @param skuIds
      * @return
      */
